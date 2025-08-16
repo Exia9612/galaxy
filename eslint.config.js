@@ -1,35 +1,58 @@
-import tseslint from 'typescript-eslint';
-import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import eslintPluginPrettier from 'eslint-plugin-prettier'
+const { defineConfig, globalIgnores } = require("eslint/config");
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+const globals = require('globals');
+const js = require('@eslint/js');
+const tseslint = require('typescript-eslint');
+const typescriptParser = require('@typescript-eslint/parser');
 
-export default tseslint.config([
+// eslint9 document https://eslint.org/docs/latest/use/configure/configuration-files
+
+module.exports = defineConfig([
   {
-    ignores: [
-      'dist',
-      'errorJson.js',
-      'browser.js',
-      'node_modules',
-      'test',
-      '.gitignore',
-      '.prettierignore',
-      'scripts/*',
-      'rollup.config.mjs'
-    ],
-    extends: [
-      js.configs.recommended,
-      // typescript 规则
-      tseslint.configs.recommended,
-      // react 规则
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-      // prettier 冲突
-      eslintPluginPrettier.configs
-    ],
+    name: 'root',
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      // 追加浏览器全局变量，例如window
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      } 
+    }
+  },
+  globalIgnores([
+    'dist',
+    'errorJson.js',
+    'browser.js',
+    'node_modules',
+    'test',
+    '.gitignore',
+    '.prettierignore',
+    'scripts/*',
+    'rollup.config.mjs'
+  ]),
+  eslintPluginPrettierRecommended,
+  {
+    name: "js",
+    files: ['**/*.js', '**/*.jsx'],
+    plugins: {
+			js,
+		},
+		extends: ["js/recommended"],
     rules: {
       "no-useless-escape": "off",
+    },
+  },
+  {
+    name: "typescript",
+    files: ['**/*.ts', '**/*.tsx'],
+    plugins: {
+      tseslint,
+    },
+    extends: [
+      "tseslint/recommended",
+    ],
+    rules: {
       "@typescript-eslint/interface-name-prefix": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -38,9 +61,7 @@ export default tseslint.config([
       "@typescript-eslint/no-unused-vars": "warn",
     },
     languageOptions: {
-      ecmaVersion: 2020,
-      // 追加浏览器全局变量，例如window
-      globals: globals.browser,
+      parser: typescriptParser,
     }
   }
 ])
