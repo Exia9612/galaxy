@@ -42,6 +42,8 @@ module.exports = defineConfig([
 		rules: {
 			"no-useless-escape": "off",
 			"no-unused-vars": "off",
+			"block-spacing": [2, "always"],
+			"no-eval": "on",
 		},
 	},
 	{

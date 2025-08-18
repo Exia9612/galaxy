@@ -30,5 +30,19 @@
 	},
 	"[scss]": {
 	  "editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	},
+
+	// ========================stylelint==============================
+  // 使用 stylelint 自身的校验即可, 关闭vscode验证
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "less", "sass", "scss"],
+  // 在editor.codeActionsOnSave中增加styleLint修复
+  
+  // 保存自动修复
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  },
+// ===============================================================
 }
