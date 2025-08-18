@@ -5,4 +5,4 @@ class A {
 }
 
 const a = new A("a");
-console.log(a);
+console.log(a, "h");
