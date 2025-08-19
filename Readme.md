@@ -8,12 +8,16 @@
 
 # Todo(2025.8.17)
 
-- 保存按照prettier自动格式化
-- 配置cursor lint规则
+- <del>保存按照prettier自动格式化</del>
+- <del>配置cursor lint规则</del>
 
 # Todo(2025.8.19)
 
-- lint-staged & husky
+- <del>lint-staged & husky</del>
+- 自定义提交规范
+
+# Todo(2025.8.20)
+
 - 自定义提交规范
 
 # 月度任务
