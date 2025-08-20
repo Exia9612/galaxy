@@ -1,9 +1,9 @@
 packages:
-  - "tools/*" #工具层：提供构建、lint、类型检查等统一工程能力
+  - "tools" #工具层：提供构建、lint、类型检查等统一工程能力
   - "packages/*" #共享基础层
   - "apps/*" #应用层
   - "!**/__tests__/**"
-  - '!**/dist/**'
+  - "!**/dist/**"
 
 catalog:
   react: ^18.3.1

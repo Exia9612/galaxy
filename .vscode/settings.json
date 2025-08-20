@@ -1,48 +1,51 @@
 {
 	"editor.formatOnSave": true,
+	"editor.tabSize": 2,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[javascript]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[javascriptreact]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[typescript]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[typescriptreact]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[json]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[html]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[markdown]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[css]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[less]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[scss]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 
 	// ========================stylelint==============================
-  // 使用 stylelint 自身的校验即可, 关闭vscode验证
-  "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
-  "stylelint.validate": ["css", "less", "sass", "scss"],
-  // 在editor.codeActionsOnSave中增加styleLint修复
-  
-  // 保存自动修复
-  "editor.codeActionsOnSave": {
-    "source.fixAll.stylelint": "explicit"
-  },
-// ===============================================================
+	// 使用 stylelint 自身的校验即可, 关闭vscode验证
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": false,
+	"stylelint.validate": ["css", "less", "sass", "scss"],
+	// 在editor.codeActionsOnSave中增加styleLint修复
+
+	// 保存自动修复
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": "explicit"
+	}
+	// ===============================================================
 }
