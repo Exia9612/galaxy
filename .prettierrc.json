@@ -1,7 +1,7 @@
 {
 	"arrowParens": "always",
 	"bracketSameLine": true,
-	"bracketSpacing": false,
+	"bracketSpacing": true,
 	"semi": true,
 	"experimentalTernaries": false,
 	"singleQuote": false,
@@ -17,5 +17,6 @@
 	"requirePragma": false,
 	"useTabs": true,
 	"embeddedLanguageFormatting": "auto",
-	"tabWidth": 2
+	"tabWidth": 2,
+	"objectCurlySpacing": true
 }
