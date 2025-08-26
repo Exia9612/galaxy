@@ -3,17 +3,21 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
+		"build": "rollup --config",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC",
+	"license": "MIT",
 	"packageManager": "pnpm@10.8.1",
 	"devDependencies": {
+		"@rollup/plugin-babel": "catalog:rollup",
+		"@rollup/plugin-node-resolve": "catalog:rollup",
 		"html-webpack-plugin": "catalog:webpack",
-		"ts-loader": "catalog:webpack",
-		"webpack": "catalog:webpack",
-		"webpack-cli": "catalog:webpack"
+		"rollup": "catalog:rollup",
+		"rollup-plugin-commonjs": "catalog:rollup",
+		"@rollup/plugin-typescript": "catalog:rollup"
 	}
 }
