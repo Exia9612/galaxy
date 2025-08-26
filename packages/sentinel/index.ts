@@ -1,9 +1,8 @@
 // 测试用入口文件
-import PerformanceMetricStore from "./core/performance/metric";
 import { PerformanceMetric } from "./core/performance/type";
+import PerformanceMetricStore from "./core/performance";
 
-const metricStore = new PerformanceMetricStore();
+const pms = new PerformanceMetricStore();
 
-metricStore.set(PerformanceMetric.FP, 100);
-
-console.log(metricStore.get(PerformanceMetric.FP));
+console.log("=======================", pms.metricStore);
+console.log("-----------", pms.metricStore.get(PerformanceMetric.FP));

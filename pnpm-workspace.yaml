@@ -11,3 +11,10 @@ catalog:
   react-dom: ^18.3.1
   "@types/react": ^18.3.1
   "@types/react-dom": ^18.3.1
+
+catalogs:
+  webpack:
+    html-webpack-plugin: ^5.6.4
+    ts-loader: ^9.5.2
+    webpack: ^5.101.3
+    webpack-cli: ^6.0.1

@@ -1,6 +1,6 @@
 import { PerformanceMetric, MetricValue } from "./type";
 
-class PerformanceMetricStore {
+class Store {
 	metricStore: Map<PerformanceMetric, MetricValue>;
 
 	constructor() {
@@ -23,13 +23,9 @@ class PerformanceMetricStore {
 		this.metricStore.clear();
 	}
 
-	// initFP() {
-	// 	new PerformanceObserver((entryList) => {
-	// 		for (const entry of entryList.getEntriesByName("first-paint")) {
-	// 			this.metricStore.set(PerformanceMetric.FP, entry.startTime);
-	// 		}
-	// 	}).observe({ type: "paint", buffered: true });
-	// }
+	has(metric: PerformanceMetric) {
+		return this.metricStore.has(metric);
+	}
 }
 
-export default PerformanceMetricStore;
+export default Store;
