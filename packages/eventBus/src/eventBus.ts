@@ -1,5 +1,3 @@
-import { TSFunction } from "../global";
-
 enum StringEvents {
 	USER_LOGIN = "user:login",
 	USER_LOGOUT = "user:logout",
@@ -48,6 +46,10 @@ export class EventBus<T extends string> {
 
 	publish(event: T) {
 		this.eventStore[event].forEach((event) => event());
+	}
+
+	unsubscribeAll(event: T) {
+		this.eventStore[event] = [];
 	}
 }
 

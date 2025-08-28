@@ -4,5 +4,6 @@
 		"outDir": "./dist",
 		"noEmit": false
 	},
+	"include": ["src/**/*", "global.d.ts"],
 	"lib": ["es2015"]
 }

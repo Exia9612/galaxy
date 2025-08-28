@@ -1,1 +1,5 @@
-export type TSFunction<T> = (...args: any[]) => T;
+declare global {
+	type TSFunction<T> = (...args: any[]) => T;
+}
+
+export {};
