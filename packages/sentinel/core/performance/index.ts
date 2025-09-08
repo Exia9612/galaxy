@@ -1,26 +1,13 @@
-import Store from "./metric";
-import { PerformanceMetric } from "./type";
+import Store from "../store/metric";
+import { PerformanceMetric } from "../store/type";
 
 class PerformanceMetricStore {
 	metricStore: Store;
 
 	constructor() {
 		this.metricStore = new Store();
-		this.afterLoad(() => {
-			this.initFP();
-		});
+		this.initFP();
 	}
-
-	private afterLoad = (callback: any) => {
-		if (document.readyState === "complete") {
-			setTimeout(callback);
-		} else {
-			window.addEventListener("pageshow", callback, {
-				once: true,
-				capture: true,
-			});
-		}
-	};
 
 	private initFP() {
 		new PerformanceObserver((entryList) => {

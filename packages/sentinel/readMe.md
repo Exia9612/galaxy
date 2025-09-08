@@ -65,4 +65,11 @@ new PerformanceObserver((entryList) => {
 
 # Todo
 
-- performance time api 做 fallback
+## 2025.9.1
+
+### 问题
+
+1. performanceObserver 异步获取指标，需要解决初始化获取时为undefiend的问题
+   - 实现单例模式
+   - eventBus类应用为单例，可以全局获取且唯一
+   - initFP时，在observer的初始化
