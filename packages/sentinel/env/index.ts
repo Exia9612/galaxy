@@ -1,6 +1,6 @@
 import { getUserAgent, isChrome } from "../utils";
 
-export const initGlobalSentinel = () => {
+export const initSentinelGlobalObj = () => {
 	if (typeof window.__SENTINEL__ === "object") return;
 
 	window.__SENTINEL__ = {
