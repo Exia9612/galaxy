@@ -1,4 +1,4 @@
-const {defineConfig, globalIgnores} = require("eslint/config");
+const { defineConfig, globalIgnores } = require("eslint/config");
 const eslintPluginPrettierRecommended = require("eslint-plugin-prettier/recommended");
 const globals = require("globals");
 const js = require("@eslint/js");
@@ -43,7 +43,11 @@ module.exports = defineConfig([
 			"no-useless-escape": "off",
 			"no-unused-vars": "off",
 			"block-spacing": [2, "always"],
-			"no-eval": "on",
+			"no-eval": "error",
+			// 允许空行
+			"no-trailing-spaces": "off",
+			"no-multiple-empty-lines": "off",
+			"eol-last": "off",
 		},
 	},
 	{
@@ -67,10 +71,33 @@ module.exports = defineConfig([
 			"@typescript-eslint/no-explicit-any": "off",
 			"@typescript-eslint/no-empty-function": "off",
 			"@typescript-eslint/no-unused-vars": "warn",
+			// "@typescript-eslint/indent": "off",
+			// 允许空行
+			"no-trailing-spaces": "off",
+			"no-multiple-empty-lines": "off",
+			"eol-last": "off",
 		},
 		languageOptions: {
 			parser: typescriptParser,
 		},
 	},
-	eslintPluginPrettierRecommended,
+	{
+		...eslintPluginPrettierRecommended,
+		rules: {
+			...eslintPluginPrettierRecommended.rules,
+			// 如果你需要保留尾随空格，可以完全禁用Prettier的格式化检查
+			"prettier/prettier": "off", // 完全禁用Prettier格式化检查
+			// "prettier/prettier": [
+			// 	"warn", // 改为警告而不是错误
+			// 	{
+			// 		"usePrettierrc": true, // 使用 .prettierrc.json 文件
+			// 		"endOfLine": "auto", // 允许不同的行尾符
+			// 	},
+			// ],
+			// 允许空行和尾随空格
+			// "no-trailing-spaces": "off",
+			// "no-multiple-empty-lines": "off",
+			// "eol-last": "off",
+		},
+	},
 ]);

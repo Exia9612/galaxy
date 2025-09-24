@@ -3,7 +3,7 @@ export const initFCP = (cb?: TSFunc<void>) => {
 		for (const entry of entryList.getEntriesByName("first-content-paint")) {
 			fcpObserver.disconnect();
 			const fcp = entry.startTime;
-			cb && cb(fcp);
+			cb?.(fcp);
 		}
 	});
 

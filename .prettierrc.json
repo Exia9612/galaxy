@@ -18,5 +18,6 @@
 	"useTabs": true,
 	"embeddedLanguageFormatting": "auto",
 	"tabWidth": 2,
-	"objectCurlySpacing": true
+	"objectCurlySpacing": true,
+	"noMixedSpacesAndTabs": false
 }

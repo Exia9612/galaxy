@@ -78,11 +78,6 @@ class SentinelPluginSys {
 			this.plugins = plugins;
 		}
 	}
-
-	//挂载
-	use() {
-		this.plugins.forEach((plugin) => plugin.apply(this.hooks));
-	}
 }
 
 export default SentinelPluginSys;
