@@ -63,6 +63,10 @@ new PerformanceObserver((entryList) => {
 
 ## Navaigation timing
 
+## TS declare global
+
+[参考](https://juejin.cn/post/7392071838640062475?searchId=202509271632274440F92C5E9A86214A09)
+
 # Todo
 
 ## 2025.9.1

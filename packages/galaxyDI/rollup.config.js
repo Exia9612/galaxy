@@ -8,33 +8,32 @@ export default {
 	input: "src/index.ts",
 	output: [
 		{
-			file: "dist/esm/index.js",
 			format: "esm",
+			file: "dist/esm/index.js",
 		},
 		{
-			file: "dist/cjs/index.js",
 			format: "cjs",
+			file: "dist/cjs/index.js",
 		},
 		{
+			format: "umd",
 			file: "dist/umd/index.js",
-			format: "umd", // umd是兼容amd/cjs/iife的通用打包格式，适合浏览器
-			name: "eventBus", // cdn方式引入时挂载在window上面用的就是这个名字
+			name: "galaxyDI",
 		},
 		{
-			file: "dist/bundle/index.js",
 			format: "iife",
-			name: "eventBus",
+			file: "dist/bundle/index.js",
+			name: "galaxyDI",
 			plugins: [terser()],
 		},
 	],
 	plugins: [
 		resolve(), // 查找和打包node_modules中的第三方模块
-		commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
+		commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理，rollup处理配置文件时需要
 		typescript({
 			declaration: true, // 生成 .d.ts 文件
-			// declarationDir: "", // 类型文件输出目录
 			rootDir: "./src",
-		}), // 解析TypeScript
+		}),
 		babel({ babelHelpers: "bundled" }), // babel配置,编译es6
 	],
 };

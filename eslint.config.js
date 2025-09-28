@@ -22,7 +22,7 @@ module.exports = defineConfig([
 		},
 	},
 	globalIgnores([
-		"dist",
+		"**/*/dist",
 		"errorJson.js",
 		"browser.js",
 		"node_modules",
@@ -81,23 +81,21 @@ module.exports = defineConfig([
 			parser: typescriptParser,
 		},
 	},
-	{
-		...eslintPluginPrettierRecommended,
-		rules: {
-			...eslintPluginPrettierRecommended.rules,
-			// 如果你需要保留尾随空格，可以完全禁用Prettier的格式化检查
-			"prettier/prettier": "off", // 完全禁用Prettier格式化检查
-			// "prettier/prettier": [
-			// 	"warn", // 改为警告而不是错误
-			// 	{
-			// 		"usePrettierrc": true, // 使用 .prettierrc.json 文件
-			// 		"endOfLine": "auto", // 允许不同的行尾符
-			// 	},
-			// ],
-			// 允许空行和尾随空格
-			// "no-trailing-spaces": "off",
-			// "no-multiple-empty-lines": "off",
-			// "eol-last": "off",
-		},
-	},
+	// {
+	// 	...eslintPluginPrettierRecommended,
+	// 	rules: {
+	// 		...eslintPluginPrettierRecommended.rules,
+	// 		// "prettier/prettier": [
+	// 		// 	"warn", // 改为警告而不是错误
+	// 		// 	{
+	// 		// 		"usePrettierrc": true, // 使用 .prettierrc.json 文件
+	// 		// 		"endOfLine": "auto", // 允许不同的行尾符
+	// 		// 	},
+	// 		// ],
+	// 		// 允许空行和尾随空格
+	// 		// "no-trailing-spaces": "off",
+	// 		// "no-multiple-empty-lines": "off",
+	// 		// "eol-last": "off",
+	// 	},
+	// },
 ]);

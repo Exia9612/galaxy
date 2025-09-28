@@ -20,6 +20,7 @@
 	"dependencies": {
 		"eventBus": "workspace:*",
 		"tapable": "^2.2.3",
-		"web-vitals": "^5.1.0"
+		"web-vitals": "^5.1.0",
+		"galaxyDI": "workspace:*"
 	}
 }

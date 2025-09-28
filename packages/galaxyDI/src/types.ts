@@ -12,7 +12,7 @@ interface BaseProvider {
 
 interface ProviderWithUseClass extends BaseProvider {
 	useClass: { new (...args: any[]): any };
-	constructorArgs?: any[];
+	constructorArgs?: Record<string, any>;
 }
 
 interface ProviderWithoutUseClass extends BaseProvider {

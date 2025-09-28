@@ -9,7 +9,7 @@ export default function createContainer(
 		...opt,
 	};
 
-	class Container {
+	class DIContainer {
 		registry: Record<string, any>;
 
 		constructor() {
@@ -64,7 +64,6 @@ export default function createContainer(
 			} else if ("useFactory" in provider) {
 				this.registry[name] = provider.useFactory!(this.getDeps(provider));
 			} else if ("useClass" in provider) {
-				// 当使用useClass时，constructorArgs是必需的
 				const deps = this.getDeps(provider);
 				const constructorArgs = provider.constructorArgs;
 				this.registry[name] = new provider.useClass!({
@@ -89,5 +88,5 @@ export default function createContainer(
 		}
 	}
 
-	return Container;
+	return DIContainer;
 }

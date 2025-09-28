@@ -25,3 +25,6 @@ catalogs:
     rollup: ^4.48.1
     rollup-plugin-commonjs: ^1.1.0
     "@rollup/plugin-typescript": ^10.0.1
+    "@rollup/plugin-alias": ^5.1.1
+    "@rollup/plugin-json": ^6.1.0
+    rollup-plugin-terser: ^7.0.2
