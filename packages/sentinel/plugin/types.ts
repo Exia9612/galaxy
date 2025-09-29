@@ -1,8 +1,9 @@
 import { SyncHook } from "tapable";
+import { PerformanceMetric, MetricValue } from "../core/store/type";
 
 export interface SentinelAllHooks {
 	beforeInit: SyncHook<void>;
-	afterInit: SyncHook<void>;
+	afterInit: SyncHook<Record<PerformanceMetric, MetricValue>, void>;
 	// beforeSendData
 	// afterSendData
 }

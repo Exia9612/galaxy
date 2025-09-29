@@ -83,8 +83,8 @@ export default function createContainer(
 			}
 		}
 
-		get(name: string) {
-			return this.registry[name];
+		get<T>(name: string) {
+			return this.registry[name] as T;
 		}
 	}
 

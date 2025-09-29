@@ -15,6 +15,17 @@ class Store {
 		return this.metricStore.get(metric);
 	}
 
+	getAll() {
+		const result: Record<PerformanceMetric, MetricValue> = {} as Record<
+			PerformanceMetric,
+			MetricValue
+		>;
+		this.metricStore.forEach((value, key) => {
+			result[key] = value;
+		});
+		return result;
+	}
+
 	remove(metric: PerformanceMetric) {
 		this.metricStore.delete(metric);
 	}

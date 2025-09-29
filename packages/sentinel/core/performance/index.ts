@@ -3,12 +3,26 @@ import { PerformanceMetric } from "../store/type";
 import { initFCP } from "./fcp";
 import { initFP } from "./fp";
 import SentinelPluginSys from "../../plugin";
+import SentinelReport from "packages/sentinel/report";
 
 class PerformanceMetricStore {
-	metricStore: Store;
+	store: Store;
+	// DI 注入，提供插件能力
+	sentinelPlugin: SentinelPluginSys;
+	sentinelReport: SentinelReport;
 
-	constructor() {
-		this.metricStore = new Store();
+	constructor({
+		sentinelPlugin,
+		store,
+		sentinelReport,
+	}: {
+		sentinelPlugin: SentinelPluginSys;
+		store: Store;
+		sentinelReport: SentinelReport;
+	}) {
+		this.store = store;
+		this.sentinelPlugin = sentinelPlugin;
+		this.sentinelReport = sentinelReport;
 		this.initMetrics();
 	}
 
@@ -20,23 +34,25 @@ class PerformanceMetricStore {
 
 		// afterInit hook
 		// queueMicrotask, 收集数据是异步的，所以需要上报数据也是异步的
+		queueMicrotask(() => {
+			this.sentinelPlugin.hooks.performance.afterInit?.call(
+				this.store.getAll(),
+			);
+		});
 
 		// 放在DI container
 		// const sentinelPlugin = new SentinelPluginSys(options.plugins || []);
-
-		// // 传入数据
-		// sentinelPlugin.hooks.performance.afterInit?.call(this.metricStore);
 	}
 
 	private setFP() {
 		initFP((fp) => {
-			this.metricStore.set(PerformanceMetric.FP, fp);
+			this.store.set(PerformanceMetric.FP, fp);
 		});
 	}
 
 	private setFCP() {
 		initFCP((fcp) => {
-			this.metricStore.set(PerformanceMetric.FCP, fcp);
+			this.store.set(PerformanceMetric.FCP, fcp);
 		});
 	}
 

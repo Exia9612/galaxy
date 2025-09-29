@@ -4,18 +4,50 @@ import PerformanceMetricStore from "./core/performance";
 import { initSentinelGlobalObj } from "./env";
 import { Plugin } from "./plugin/types";
 import SentinelPluginSys from "./plugin";
+import { createContainer, Provider, resolveContainer } from "packages/galaxyDI";
+import Store from "./core/store/metric";
+import SentinelReport from "./report";
+import { SentinelOptions } from "./types";
 
-const pms = new PerformanceMetricStore();
+const providers: Provider[] = [
+	{
+		name: "perfStore",
+		useClass: Store,
+	},
+	{
+		name: "sentinelPlugin",
+		useClass: SentinelPluginSys,
+		constructorArgs: {
+			plugins: [],
+		},
+	},
+	{
+		name: "sentinelReport",
+		useClass: SentinelReport,
+		// constructorArgs: options.report
+		constructorArgs: {
+			path: "http://localhost:3000",
+			port: 3000,
+		},
+	},
+	{
+		name: "PerformanceMetricStore",
+		useClass: PerformanceMetricStore,
+		deps: ["perfStore", "sentinelPlugin", "sentinelReport"],
+	},
+];
 
-console.log("=======================", pms.metricStore);
-console.log("-----------", pms.metricStore.get(PerformanceMetric.FP));
+const container = resolveContainer(createContainer(providers));
 
-interface Options {
-	plugins?: Plugin[];
-}
+const pms = container.get<PerformanceMetricStore>("PerformanceMetricStore");
 
-function init(options: Options) {
+function init(options: SentinelOptions) {
 	initSentinelGlobalObj();
 }
 
-init({});
+init({
+	report: {
+		path: "http://localhost:3000",
+		port: 3000,
+	},
+});
