@@ -8,7 +8,7 @@ class SentinelPluginSys {
 	};
 	private plugins: Plugin[] = [];
 
-	constructor(plugins?: Plugin[]) {
+	constructor({ plugins }: { plugins?: Plugin[] }) {
 		this.hooks = {
 			performance: {
 				afterInit: new SyncHook<Record<PerformanceMetric, MetricValue>, void>([
@@ -19,6 +19,9 @@ class SentinelPluginSys {
 
 		if (plugins && plugins.length) {
 			this.plugins = plugins;
+			this.plugins.forEach((plugin) => {
+				plugin.apply(this.hooks);
+			});
 		}
 	}
 }

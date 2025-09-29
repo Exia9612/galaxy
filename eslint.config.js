@@ -25,7 +25,7 @@ module.exports = defineConfig([
 		"**/*/dist",
 		"errorJson.js",
 		"browser.js",
-		"node_modules",
+		"**/*/node_modules",
 		"test",
 		".gitignore",
 		".prettierignore",

@@ -8,4 +8,6 @@ export const initFP = (cb?: (...args: any[]) => void) => {
 	});
 
 	fpObserver.observe({ type: "paint", buffered: true });
+
+	return fpObserver;
 };

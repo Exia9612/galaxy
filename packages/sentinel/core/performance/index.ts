@@ -13,14 +13,14 @@ class PerformanceMetricStore {
 
 	constructor({
 		sentinelPlugin,
-		store,
+		perfStore,
 		sentinelReport,
 	}: {
 		sentinelPlugin: SentinelPluginSys;
-		store: Store;
+		perfStore: Store;
 		sentinelReport: SentinelReport;
 	}) {
-		this.store = store;
+		this.store = perfStore;
 		this.sentinelPlugin = sentinelPlugin;
 		this.sentinelReport = sentinelReport;
 		this.initMetrics();
@@ -29,19 +29,22 @@ class PerformanceMetricStore {
 	private initMetrics() {
 		// beforeInit hook
 
-		this.setFP();
-		this.setFCP();
+		// this.setFP();
+		// this.setFCP();
+
+		Promise.all([this.setFP(), this.setFCP()]).then((res) => {
+			console.log("======execute Promise.all=========", res);
+			console.log("======execute queueMicrotask=========", this.store.getAll());
+		});
 
 		// afterInit hook
 		// queueMicrotask, 收集数据是异步的，所以需要上报数据也是异步的
-		queueMicrotask(() => {
-			this.sentinelPlugin.hooks.performance.afterInit?.call(
-				this.store.getAll(),
-			);
-		});
-
-		// 放在DI container
-		// const sentinelPlugin = new SentinelPluginSys(options.plugins || []);
+		// queueMicrotask(() => {
+		// 	console.log("======execute queueMicrotask=========", this.store.getAll());
+		// 	this.sentinelPlugin.hooks.performance.afterInit?.call(
+		// 		this.store.getAll(),
+		// 	);
+		// });
 	}
 
 	private setFP() {

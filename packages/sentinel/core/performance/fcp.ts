@@ -8,4 +8,6 @@ export const initFCP = (cb?: TSFunc<void>) => {
 	});
 
 	fcpObserver.observe({ type: "paint", buffered: true });
+
+	return fcpObserver;
 };
