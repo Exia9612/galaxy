@@ -1,0 +1,30 @@
+{
+	"name": "@galaxy/reactive",
+	"version": "1.0.0",
+	"description": "Vue3风格的响应式数据系统",
+	"type": "module",
+	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "rollup -c",
+		"dev": "rollup -c -w",
+		"test": "node test.mjs"
+	},
+	"keywords": [
+		"reactive",
+		"vue3",
+		"proxy",
+		"observer"
+	],
+	"author": "Galaxy Team",
+	"license": "MIT",
+	"devDependencies": {
+		"@rollup/plugin-typescript": "^11.1.5",
+		"rollup": "^4.9.0",
+		"typescript": "^5.3.0"
+	},
+	"dependencies": {
+		"tslib": "^2.8.1"
+	}
+}

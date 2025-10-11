@@ -22,7 +22,7 @@
 
 # Todo(2025.9.29)
 
-- 实现数据响应式，应对performance异步收集数据问题
+- 实现数据响应式，通过watch监听metric变化，应对performance异步收集数据问题
 
 # 月度任务
 
