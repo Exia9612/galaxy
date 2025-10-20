@@ -27,9 +27,3 @@ class SentinelPluginSys {
 }
 
 export default SentinelPluginSys;
-
-// class PerformanceMetricPlugin {
-// 	apply(hooks) {
-// 		hooks.performance.afterInit.tap('performanceAfterInit', (metrics) => {})
-// 	}
-// }

@@ -17,7 +17,7 @@ function isArray(value: any): value is any[] {
 }
 
 // 检查是否为函数
-function isFunction(value: any): value is Function {
+export function isFunction(value: any) {
 	return typeof value === "function";
 }
 
