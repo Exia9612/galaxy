@@ -17,8 +17,9 @@ export class ReactiveEffect {
 	public active: boolean;
 	public options: EffectOptions;
 	private _fn: (...args: any) => any;
+	public _oldValue: any;
 
-	constuctor(fn: (...args: any) => any, options?: EffectOptions) {
+	constructor(fn: (...args: any) => any, options?: EffectOptions) {
 		this._fn = fn;
 		this.deps = new Set();
 		this.options = options || {};
@@ -81,8 +82,8 @@ export function track(target: object, key: string | symbol) {
 export function trigger(
 	target: object,
 	key: string | symbol,
-	oldValue?: any,
-	newValue?: any,
+	_oldValue?: any,
+	_newValue?: any,
 ) {
 	const depsMap = targetMap.get(target);
 	if (!depsMap) {
@@ -103,6 +104,16 @@ export function trigger(
 	});
 }
 
+export function triggerEffects(deps: Dep) {
+	deps.forEach((effect) => {
+		if (effect.options.scheduler) {
+			effect.options.scheduler(effect);
+		} else {
+			effect.run();
+		}
+	});
+}
+
 export function trackEffects(deps: Dep) {
 	if (!activeEffect) {
 		return;
@@ -113,4 +124,21 @@ export function trackEffects(deps: Dep) {
 	}
 	deps.add(activeEffect);
 	activeEffect.deps.add(deps);
+}
+
+export function isTracking() {
+	return shouldTrack && activeEffect !== undefined;
+}
+
+export function effect(fn: (...args: any) => any, options?: EffectOptions) {
+	const _effect = new ReactiveEffect(fn, options);
+	_effect.run();
+
+	const runner: any = _effect.run.bind(_effect);
+	runner.effect = _effect;
+	return runner;
+}
+
+export function stop(runner: any) {
+	runner.effect.stop();
 }

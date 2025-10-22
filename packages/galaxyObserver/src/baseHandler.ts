@@ -1,3 +1,4 @@
+// 如果需要忽略特定行，可以使用 // @ts-ignore
 import { track, trigger } from "./effect";
 import { createReactive, createReadonly } from "./reactive";
 import { isObject } from "./utils";
