@@ -6,7 +6,7 @@
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "jest"
 	},
 	"keywords": [],
 	"author": "",
@@ -18,14 +18,16 @@
 		"@rollup/plugin-json": "catalog:rollup",
 		"@rollup/plugin-node-resolve": "catalog:rollup",
 		"@rollup/plugin-typescript": "catalog:rollup",
-		"rollup": "catalog:rollup",
-		"rollup-plugin-commonjs": "catalog:rollup",
-		"rollup-plugin-terser": "catalog:rollup",
-		"tslib": "^2.8.1",
+		"@swc/jest": "^0.2.39",
+		"@types/jest": "catalog:jest",
 		"jest": "catalog:jest",
 		"jest-environment-jsdom": "catalog:jest",
 		"jest-silent-reporter": "catalog:jest",
 		"jest-snapshot": "catalog:jest",
-		"@types/jest": "catalog:jest"
+		"rollup": "catalog:rollup",
+		"rollup-plugin-commonjs": "catalog:rollup",
+		"rollup-plugin-terser": "catalog:rollup",
+		"ts-jest": "^29.4.5",
+		"tslib": "^2.8.1"
 	}
 }

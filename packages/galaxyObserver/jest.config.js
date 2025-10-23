@@ -25,7 +25,7 @@ module.exports = {
 	transform: {
 		"^.+\\.(ts)$": ["@swc/jest"],
 	},
-	testMatch: ["**/__tests__/?(*.)+(test).ts"],
+	testMatch: ["**/__test__/?(*.)+(test).ts"],
 	testEnvironment: "node",
 	preset: "ts-jest",
 	clearMocks: true,
