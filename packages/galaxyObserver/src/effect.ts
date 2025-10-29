@@ -95,7 +95,16 @@ export function trigger(
 		return;
 	}
 
+	// 创建副本来遍历，避免在遍历时修改集合导致的问题
+	const effectsToRun = new Set<ReactiveEffect>();
 	deps.forEach((effect) => {
+		// 如果触发的 effect 就是当前正在执行的 effect，跳过以避免无限循环
+		if (effect !== activeEffect) {
+			effectsToRun.add(effect);
+		}
+	});
+
+	effectsToRun.forEach((effect) => {
 		if (effect.options.scheduler) {
 			effect.options.scheduler(effect);
 		} else {
@@ -105,7 +114,16 @@ export function trigger(
 }
 
 export function triggerEffects(deps: Dep) {
+	// 创建副本来遍历，避免在遍历时修改集合导致的问题
+	const effectsToRun = new Set<ReactiveEffect>();
 	deps.forEach((effect) => {
+		// 如果触发的 effect 就是当前正在执行的 effect，跳过以避免无限循环
+		if (effect !== activeEffect) {
+			effectsToRun.add(effect);
+		}
+	});
+
+	effectsToRun.forEach((effect) => {
 		if (effect.options.scheduler) {
 			effect.options.scheduler(effect);
 		} else {
