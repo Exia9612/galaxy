@@ -25,14 +25,16 @@ export function isRef(ref: any) {
 	return !!ref?._isRef;
 }
 
-export function unref(ref: any) {
+export function unRef(ref: any) {
+	// 如果参数是一个 ref，则返回内部值，否则返回参数本身
 	return isRef(ref) ? ref.value : ref;
 }
 
+// 可以不通过ref.value的访问ref的值
 export function proxyRefs(object: any) {
 	return new Proxy(object, {
 		get(target: any, key: string | symbol) {
-			return unref(Reflect.get(target, key));
+			return unRef(Reflect.get(target, key));
 		},
 		set(target: any, key: string | symbol, value: any) {
 			if (isRef(target[key]) && !isRef(value)) {

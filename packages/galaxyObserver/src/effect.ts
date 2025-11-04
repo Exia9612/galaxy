@@ -35,13 +35,18 @@ export class ReactiveEffect {
 		// 执行依赖收集
 		shouldTrack = true;
 		activeEffect = this as ReactiveEffect;
-		const result = this._fn();
-		shouldTrack = false;
-
-		return result;
+		try {
+			const result = this._fn();
+			return result;
+		} finally {
+			shouldTrack = false;
+			// 执行完之后，将 activeEffect 设置为 undefined，不指向同一个effect
+			activeEffect = undefined;
+		}
 	}
 
 	stop() {
+		// 依赖删除
 		this.deps.forEach((deps) => {
 			if (deps.has(this)) {
 				deps.delete(this);
@@ -54,8 +59,12 @@ export class ReactiveEffect {
 	}
 }
 
+export function isTracking() {
+	return shouldTrack && activeEffect !== undefined;
+}
+
 export function track(target: object, key: string | symbol) {
-	if (!activeEffect) {
+	if (!activeEffect || !shouldTrack) {
 		return;
 	}
 
@@ -97,13 +106,28 @@ export function trigger(
 
 	// 创建副本来遍历，避免在遍历时修改集合导致的问题
 	const effectsToRun = new Set<ReactiveEffect>();
+	const effectsToSchedule = new Set<ReactiveEffect>();
+
 	deps.forEach((effect) => {
-		// 如果触发的 effect 就是当前正在执行的 effect，跳过以避免无限循环
-		if (effect !== activeEffect) {
+		if (effect === activeEffect) {
+			// 如果触发的 effect 就是当前正在执行的 effect
+			// 如果有 scheduler，调用 scheduler（这是用户自定义调度逻辑）
+			// 如果没有 scheduler，跳过以避免无限循环直接执行 run()
+			if (effect.options.scheduler) {
+				effectsToSchedule.add(effect);
+			}
+			// 没有 scheduler 的情况直接跳过，避免循环
+		} else {
 			effectsToRun.add(effect);
 		}
 	});
 
+	// 先处理有 scheduler 的 activeEffect
+	effectsToSchedule.forEach((effect) => {
+		effect.options.scheduler!(effect);
+	});
+
+	// 再处理其他 effect
 	effectsToRun.forEach((effect) => {
 		if (effect.options.scheduler) {
 			effect.options.scheduler(effect);
@@ -116,13 +140,28 @@ export function trigger(
 export function triggerEffects(deps: Dep) {
 	// 创建副本来遍历，避免在遍历时修改集合导致的问题
 	const effectsToRun = new Set<ReactiveEffect>();
+	const effectsToSchedule = new Set<ReactiveEffect>();
+
 	deps.forEach((effect) => {
-		// 如果触发的 effect 就是当前正在执行的 effect，跳过以避免无限循环
-		if (effect !== activeEffect) {
+		if (effect === activeEffect) {
+			// 如果触发的 effect 就是当前正在执行的 effect
+			// 如果有 scheduler，调用 scheduler（这是用户自定义调度逻辑）
+			// 如果没有 scheduler，跳过以避免无限循环直接执行 run()
+			if (effect.options.scheduler) {
+				effectsToSchedule.add(effect);
+			}
+			// 没有 scheduler 的情况直接跳过，避免循环
+		} else {
 			effectsToRun.add(effect);
 		}
 	});
 
+	// 先处理有 scheduler 的 activeEffect
+	effectsToSchedule.forEach((effect) => {
+		effect.options.scheduler!(effect);
+	});
+
+	// 再处理其他 effect
 	effectsToRun.forEach((effect) => {
 		if (effect.options.scheduler) {
 			effect.options.scheduler(effect);
@@ -142,10 +181,6 @@ export function trackEffects(deps: Dep) {
 	}
 	deps.add(activeEffect);
 	activeEffect.deps.add(deps);
-}
-
-export function isTracking() {
-	return shouldTrack && activeEffect !== undefined;
 }
 
 export function effect(fn: (...args: any) => any, options?: EffectOptions) {

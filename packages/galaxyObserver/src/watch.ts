@@ -1,6 +1,6 @@
 import { ReactiveEffect } from "./effect";
 import { isObject } from "./utils";
-import { unref } from "./ref";
+import { unRef } from "./ref";
 
 // watch 选项接口
 export interface WatchOptions {
@@ -47,10 +47,12 @@ function traverse(value: any, seen: Set<any> = new Set()): any {
 
 // 获取watch源的值
 function getWatchSourceValue(source: WatchSource) {
+	// 如果是函数 → 执行函数获取值
 	if (typeof source === "function") {
 		return source();
 	}
-	return unref(source);
+	// 如果是 ref → 调用 unRef() 获取值
+	return unRef(source);
 }
 
 // 创建watch实例
@@ -91,7 +93,9 @@ class WatchEffect {
 		if (this.options.immediate) {
 			this.run();
 		} else {
-			// 否则先执行一次收集依赖
+			// 否则先执行一次收集依赖，并保存初始值
+			const initialValue = getWatchSourceValue(this.source);
+			this.effect._oldValue = initialValue;
 			this.effect.run();
 		}
 	}
@@ -134,6 +138,7 @@ export function watch<T = any>(
 	return () => watchEffect.stop();
 }
 
+// 在每次响应式状态发生变化时触发回调函数
 // watchEffect函数 - 自动收集依赖
 export function watchEffect(
 	effect: (onInvalidate: OnInvalidate) => void,

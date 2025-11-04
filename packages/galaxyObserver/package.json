@@ -6,7 +6,8 @@
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
 	"scripts": {
-		"test": "jest"
+		"test": "jest",
+		"test:cover": "jest --coverage"
 	},
 	"keywords": [],
 	"author": "",
