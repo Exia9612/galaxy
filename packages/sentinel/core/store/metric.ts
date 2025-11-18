@@ -1,3 +1,4 @@
+// import { reactive } from "galaxyObserver";
 import { PerformanceMetric, MetricValue } from "./type";
 
 class Store {

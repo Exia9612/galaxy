@@ -28,10 +28,11 @@ function init(options: SentinelOptions) {
 		{
 			name: "sentinelReport",
 			useClass: SentinelReport,
-			// constructorArgs: options.report
 			constructorArgs: {
-				path: "http://localhost:3000",
-				port: 3000,
+				options: {
+					...options.report,
+					appId: options.appId,
+				},
 			},
 		},
 		{
@@ -47,6 +48,7 @@ function init(options: SentinelOptions) {
 }
 
 init({
+	appId: "12345",
 	plugins: [new PerformanceAfterInitPlugin()],
 	report: {
 		path: "http://localhost:3000",

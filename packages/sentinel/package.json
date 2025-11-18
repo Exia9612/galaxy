@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "webpack"
+		"build": "webpack",
+		"test": "jest"
 	},
 	"keywords": [],
 	"author": "",
@@ -15,13 +15,20 @@
 		"html-webpack-plugin": "^5.6.4",
 		"ts-loader": "^9.5.2",
 		"webpack": "^5.101.3",
-		"webpack-cli": "^6.0.1"
+		"webpack-cli": "^6.0.1",
+		"jest": "catalog:jest",
+		"jest-environment-jsdom": "catalog:jest",
+		"jest-silent-reporter": "catalog:jest",
+		"jest-snapshot": "catalog:jest",
+		"ts-jest": "catalog:jest",
+		"tslib": "catalog:jest"
 	},
 	"dependencies": {
 		"eventBus": "workspace:*",
 		"tapable": "^2.2.3",
 		"web-vitals": "^5.1.0",
 		"galaxyDI": "workspace:*",
-		"galaxyObserver": "workspace:*"
+		"galaxyObserver": "workspace:*",
+		"@types/jest": "catalog:jest"
 	}
 }
