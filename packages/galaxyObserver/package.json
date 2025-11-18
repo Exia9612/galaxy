@@ -5,10 +5,18 @@
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
+	"type": "module",
 	"scripts": {
 		"test": "jest",
-		"test:cover": "jest --coverage"
+		"test:cover": "jest --coverage",
+		"build": "rm -rf dist && rollup --config rollup.config.js"
 	},
+	"files": [
+		"dist",
+		"lib",
+		"package.json",
+		"README.md"
+	],
 	"keywords": [],
 	"author": "",
 	"license": "MIT",

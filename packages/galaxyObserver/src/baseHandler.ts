@@ -30,6 +30,29 @@ export function createReactiveHandler(isReadonly = false, shallow = false) {
 
 			const res = Reflect.get(target, key);
 
+			// 处理 Map/Set/WeakMap/WeakSet 的方法，需要绑定到原始 target
+			// 检查 target 是否是 Map 或 Set 的实例
+			const isMap = target instanceof Map || target.constructor === Map;
+			const isSet = target instanceof Set || target.constructor === Set;
+
+			if (isMap || isSet) {
+				if (
+					typeof res === "function" &&
+					(key === "get" ||
+						key === "set" ||
+						key === "has" ||
+						key === "delete" ||
+						key === "clear" ||
+						key === "forEach" ||
+						key === "add" ||
+						key === "entries" ||
+						key === "keys" ||
+						key === "values")
+				) {
+					return res.bind(target);
+				}
+			}
+
 			if (shallow) {
 				return res;
 			}

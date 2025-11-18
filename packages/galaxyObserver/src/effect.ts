@@ -91,7 +91,9 @@ export function track(target: object, key: string | symbol) {
 export function trigger(
 	target: object,
 	key: string | symbol,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	_oldValue?: any,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	_newValue?: any,
 ) {
 	const depsMap = targetMap.get(target);

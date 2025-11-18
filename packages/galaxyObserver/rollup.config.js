@@ -4,7 +4,7 @@ import commonjs from "rollup-plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 
-module.exports = {
+export default {
 	input: "src/index.ts",
 	output: [
 		{
