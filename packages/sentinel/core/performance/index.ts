@@ -1,28 +1,38 @@
-import Store from "../store/metric";
-import { PerformanceMetric } from "../store/type";
+import Store from "../../store/metric";
 import { initFCP } from "./fcp";
 import { initFP } from "./fp";
 import { initLCP } from "./lcp";
 import SentinelPluginSys from "../../plugin";
 import SentinelReport from "../../report";
-import { DataType } from "../../types";
+import { initFID } from "./fid";
+import { DataType } from "packages/sentinel/types";
+import { initrResourcePref } from "./resource";
+import {
+	TechnicalPerformanceMetrics,
+	PerformanceMetric,
+	MetricValue,
+} from "./types";
 
-class PerformanceMetricStore {
-	store: Store;
+interface ReportMetricData {
+	metric: PerformanceMetric;
+	value: any;
+}
+class PerformanceMetricManager {
 	// DI 注入，提供插件能力
+	store: Store<PerformanceMetric, MetricValue>;
 	sentinelPlugin: SentinelPluginSys;
 	report: SentinelReport;
 
 	constructor({
 		sentinelPlugin,
-		perfStore,
+		store,
 		sentinelReport,
 	}: {
 		sentinelPlugin: SentinelPluginSys;
-		perfStore: Store;
+		store: Store<PerformanceMetric, MetricValue>;
 		sentinelReport: SentinelReport;
 	}) {
-		this.store = perfStore;
+		this.store = store;
 		this.sentinelPlugin = sentinelPlugin;
 		this.report = sentinelReport;
 		this.initMetrics();
@@ -34,6 +44,8 @@ class PerformanceMetricStore {
 		this.setFP();
 		this.setFCP();
 		this.setLCP();
+		this.setFID();
+		this.setStaticResources();
 
 		// 	this.sentinelPlugin.hooks.performance.afterInit?.call(
 		// 		this.store.getAll(),
@@ -43,11 +55,9 @@ class PerformanceMetricStore {
 	private setFP() {
 		initFP((fp) => {
 			this.store.set(PerformanceMetric.FP, fp);
-			// this.report.report({
-			// 	type: DataType.PERFORMANCE,
-			// 	data: {
-			// 		[PerformanceMetric.FP]: fp,
-			// 	},
+			// this.reportMetric({
+			// 	metric: PerformanceMetric.FP,
+			// 	value: fp,
 			// });
 		});
 	}
@@ -55,12 +65,6 @@ class PerformanceMetricStore {
 	private setFCP() {
 		initFCP((fcp) => {
 			this.store.set(PerformanceMetric.FCP, fcp);
-			// this.report.report({
-			// 	type: DataType.PERFORMANCE,
-			// 	data: {
-			// 		[PerformanceMetric.FCP]: fcp,
-			// 	},
-			// });
 		});
 	}
 
@@ -70,7 +74,26 @@ class PerformanceMetricStore {
 		});
 	}
 
-	//FID CLS TTFB
+	private setFID() {
+		initFID((fid) => {
+			this.store.set(PerformanceMetric.FID, fid);
+		});
+	}
+
+	private setStaticResources() {
+		initrResourcePref((data: TechnicalPerformanceMetrics[]) => {
+			this.store.set(PerformanceMetric.STC_RES, data);
+		});
+	}
+
+	private reportMetric(data: ReportMetricData) {
+		this.report.report({
+			type: DataType.PERFORMANCE,
+			data: {
+				...data,
+			},
+		});
+	}
 }
 
-export default PerformanceMetricStore;
+export default PerformanceMetricManager;

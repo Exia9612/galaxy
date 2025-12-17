@@ -1,11 +1,11 @@
 import Store from "../metric";
-import { PerformanceMetric } from "../type";
+import { PerformanceMetric } from "../../core/performance/types";
 
 describe("Store", () => {
-	let store: Store;
+	let store: Store<PerformanceMetric, string | number>;
 
 	beforeEach(() => {
-		store = new Store();
+		store = new Store<PerformanceMetric, number | string>();
 	});
 
 	describe("constructor", () => {
@@ -166,4 +166,3 @@ describe("Store", () => {
 		});
 	});
 });
-

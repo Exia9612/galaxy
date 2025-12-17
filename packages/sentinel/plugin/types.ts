@@ -1,5 +1,5 @@
 import { SyncHook } from "tapable";
-import { PerformanceMetric, MetricValue } from "../core/store/type";
+import { PerformanceMetric, MetricValue } from "../store/type";
 
 export interface SentinelAllHooks {
 	beforeInit: SyncHook<void>;

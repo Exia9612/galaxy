@@ -1,4 +1,4 @@
-import Store from "../core/store/metric";
+import Store from "../store/metric";
 import { DataType } from "../types";
 
 export interface SentinelReportOptions {

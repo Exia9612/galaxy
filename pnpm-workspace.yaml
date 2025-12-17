@@ -5,13 +5,6 @@ packages:
   - "!**/__tests__/**"
   - "!**/dist/**"
 
-catalog:
-  react: ^18.3.1
-  redux: ^5.0.1
-  react-dom: ^18.3.1
-  "@types/react": ^18.3.1
-  "@types/react-dom": ^18.3.1
-
 catalogs:
   webpack:
     html-webpack-plugin: ^5.6.4
@@ -37,3 +30,10 @@ catalogs:
     "@types/jest": ^29.5.3
     ts-jest: "^29.4.5"
     tslib: "^2.8.1"
+
+  react:
+    react: ^18.3.1
+    redux: ^5.0.1
+    react-dom: ^18.3.1
+    "@types/react": ^18.3.1
+    "@types/react-dom": ^18.3.1
