@@ -1,5 +1,8 @@
+import {
+	PerformanceMetric,
+	MetricValue,
+} from "@sentinel/core/performance/types";
 import { SyncHook } from "tapable";
-import { PerformanceMetric, MetricValue } from "../store/type";
 
 export interface SentinelAllHooks {
 	beforeInit: SyncHook<void>;

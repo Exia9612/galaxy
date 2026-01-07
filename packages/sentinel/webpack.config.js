@@ -9,6 +9,9 @@ module.exports = {
 		path: path.resolve(__dirname, "dist"),
 	},
 	resolve: {
+		alias: {
+			"@sentinel": path.resolve(__dirname, "./"),
+		},
 		extensions: [".ts", ".js"],
 	},
 	module: {

@@ -13,22 +13,23 @@
 	"packageManager": "pnpm@10.8.1",
 	"devDependencies": {
 		"html-webpack-plugin": "^5.6.4",
-		"ts-loader": "^9.5.2",
-		"webpack": "^5.101.3",
-		"webpack-cli": "^6.0.1",
 		"jest": "catalog:jest",
 		"jest-environment-jsdom": "catalog:jest",
 		"jest-silent-reporter": "catalog:jest",
 		"jest-snapshot": "catalog:jest",
 		"ts-jest": "catalog:jest",
-		"tslib": "catalog:jest"
+		"ts-loader": "^9.5.2",
+		"tslib": "catalog:jest",
+		"webpack": "^5.101.3",
+		"webpack-cli": "^6.0.1"
 	},
 	"dependencies": {
+		"@types/jest": "catalog:jest",
 		"eventBus": "workspace:*",
-		"tapable": "^2.2.3",
-		"web-vitals": "^5.1.0",
 		"galaxyDI": "workspace:*",
 		"galaxyObserver": "workspace:*",
-		"@types/jest": "catalog:jest"
+		"tapable": "^2.2.3",
+		"uuid": "^13.0.0",
+		"web-vitals": "^5.1.0"
 	}
 }

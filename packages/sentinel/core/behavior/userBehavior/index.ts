@@ -6,6 +6,7 @@
  * 用户自定义事件
  */
 
-export default class UserBehavior {
-	constructor() {}
-}
+import { initRouterChangeRecord } from "./routeChange";
+import { pvHandler } from "./pv";
+
+export { initRouterChangeRecord, pvHandler };

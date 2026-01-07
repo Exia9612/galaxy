@@ -1,6 +1,13 @@
 {
 	"extends": "../../tsconfig.base.json",
-	"include": ["core/**/*", "**/__test__/**/*", "global.d.ts", "store"],
+	"include": [
+		"core/**/*",
+		"**/__test__/**/*",
+		"**/*.d.ts",
+		"**/*.ts",
+		"store",
+		"env"
+	],
 	"exclude": ["node_modules", "dist"],
 	"compilerOptions": {
 		"outDir": "./dist",
