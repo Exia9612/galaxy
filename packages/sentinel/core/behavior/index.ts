@@ -11,6 +11,9 @@ import {
 } from "./userBehavior/types";
 import { BehaviorOptions } from "packages/sentinel/types";
 import { pvHandler } from "./userBehavior";
+import { proxyFetch, proxyXml } from "./http";
+import { userOrigin } from "./userOrigin";
+import { getUAFeature } from "./userAgent";
 
 class UserBehaviorManager {
 	store: Store<BehaviorMetric, BehaviorMetricValue<BehaviorMetric>>;
@@ -79,6 +82,26 @@ class UserBehaviorManager {
 		});
 	}
 
+	initHttpProxy() {
+		proxyFetch();
+		proxyXml();
+	}
+
+	initUserOrigin() {
+		const userOriginInfo = userOrigin();
+		this.store.set(BehaviorMetric.OI, {
+			...userOriginInfo,
+		});
+	}
+
+	initUserAgent() {
+		const userAgentInfo = getUAFeature(navigator.userAgent);
+		this.store.set(BehaviorMetric.UA, {
+			...userAgentInfo,
+		});
+	}
+
+	// 对外暴露，用户自定义行为上报
 	cdrHandler(data: CustomDefineRecordMetric) {
 		this.store.set(BehaviorMetric.CDR, {
 			...data,
