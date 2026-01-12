@@ -8,6 +8,7 @@ import SentinelReport from "./report";
 import { SentinelOptions } from "./types";
 import PerformanceAfterInitPlugin from "./plugin/testPlugin";
 import { UserInfo } from "./core/behavior/userInfo";
+import { ErrorManager } from "./core/error";
 
 function createDIContainer(options: SentinelOptions) {
 	const providers: Provider[] = [
@@ -51,6 +52,11 @@ function createDIContainer(options: SentinelOptions) {
 			constructorArgs: {
 				options: options.behavior || 100,
 			},
+		},
+		{
+			name: "ErrorManager",
+			useClass: ErrorManager,
+			deps: ["store", "sentinelPlugin", "sentinelReport"],
 		},
 	];
 
